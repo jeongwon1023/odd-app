@@ -1,0 +1,64 @@
+workflows:
+  ios-release:
+    name: ODD - iOS 빌드
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+      vars:
+        BUNDLE_ID: "com.odd.app"
+        APP_NAME: "ODD"
+      # Codemagic 대시보드에서 아래 값을 환경변수로 설정하세요:
+      # APP_STORE_CONNECT_ISSUER_ID
+      # APP_STORE_CONNECT_KEY_IDENTIFIER
+      # APP_STORE_CONNECT_PRIVATE_KEY
+      # CERTIFICATE_PRIVATE_KEY
+      ios_signing:
+        distribution_type: development   # TestFlight 배포는 app_store 로 변경
+        bundle_identifier: com.odd.app
+    scripts:
+      - name: Flutter pub get
+        script: flutter pub get
+      - name: Pod install
+        script: |
+          find . -name "Podfile" -execdir pod install \;
+      - name: Flutter build iOS
+        script: |
+          flutter build ios --release --no-codesign
+      - name: Xcode archive & export
+        script: |
+          xcode-project use-profiles
+          xcode-project build-ipa \
+            --workspace ios/Runner.xcworkspace \
+            --scheme Runner
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      email:
+        recipients:
+          - aabu01046@gmail.com
+        notify:
+          success: true
+          failure: true
+
+  android-release:
+    name: ODD - Android 빌드
+    max_build_duration: 60
+    environment:
+      flutter: stable
+    scripts:
+      - name: Flutter pub get
+        script: flutter pub get
+      - name: Flutter build APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - aabu01046@gmail.com
+        notify:
+          success: true
+          failure: true
