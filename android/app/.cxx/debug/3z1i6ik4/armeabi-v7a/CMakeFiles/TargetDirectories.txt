@@ -1,0 +1,2 @@
+C:/Users/chahy/OneDrive/문서/GitHub/odd-app/android/app/.cxx/debug/3z1i6ik4/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/chahy/OneDrive/문서/GitHub/odd-app/android/app/.cxx/debug/3z1i6ik4/armeabi-v7a/CMakeFiles/rebuild_cache.dir

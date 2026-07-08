@@ -1,0 +1,29 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# API 키 (절대 커밋하지 마세요)
+lib/config/env.dart
+
+# macOS
+.DS_Store
+
+# Android
+android/local.properties
+android/.gradle/
+*.apk
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+
+lib/config/env.dart
+pipeline/
+lib/config/env.dart
